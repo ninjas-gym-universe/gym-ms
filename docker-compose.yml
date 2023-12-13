@@ -1,0 +1,18 @@
+version: "3.5"
+
+services:
+  gym-db:
+    container_name: gym-db
+    image: postgres:16
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: 12345
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
+    external: true

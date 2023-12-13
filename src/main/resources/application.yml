@@ -1,6 +1,9 @@
 spring:
   application:
     name: @project.name@
+  jpa:
+    hibernate:
+      ddl-auto: validate
 
 logging:
   file:

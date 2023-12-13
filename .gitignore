@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 src/main/resources/*-local.yml
 logs/
+.env
 
 ### STS ###
 .apt_generated

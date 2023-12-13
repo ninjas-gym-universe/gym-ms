@@ -1,0 +1,23 @@
+spring:
+  main:
+    banner-mode: off
+  jpa:
+    properties:
+      hibernate:
+        format_sql: true
+        generate_statistics: true
+  cloud:
+    config:
+      enabled: false
+
+eureka:
+  client:
+    enabled: false
+
+logging:
+  file:
+    name:
+  level:
+    org.hibernate:
+      SQL: debug
+      orm.jdbc.bind: trace

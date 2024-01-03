@@ -36,6 +36,6 @@ public class MuscleGroup {
     @Column(nullable = false, length = 50)
     private String name;
     @ManyToOne(fetch = LAZY, cascade = {PERSIST, MERGE})
-    @JoinColumn(name = "parent_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "parent_id", referencedColumnName = "id")
     private MuscleGroup parent;
 }

@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "name": "shoulders"
+  },
+  {
+    "id": 2,
+    "name": "chest"
+  },
+  {
+    "id": 3,
+    "name": "anterior delta",
+    "parent": {
+      "id": 1,
+      "name": "shoulders"
+    }
+  },
+  {
+    "id": 4,
+    "name": "average delta",
+    "parent": {
+      "id": 1,
+      "name": "shoulders"
+    }
+  },
+  {
+    "id": 5,
+    "name": "rear delta",
+    "parent": {
+      "id": 1,
+      "name": "shoulders"
+    }
+  }
+]

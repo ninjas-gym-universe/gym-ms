@@ -84,7 +84,6 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <!-- to json comparing -->
             <groupId>net.javacrumbs.json-unit</groupId>
             <artifactId>json-unit-spring</artifactId>
             <version>${json-unit-spring.version}</version>

@@ -47,6 +47,5 @@ class MuscleGroupControllerTests {
             .andDo(print())
             .andExpect(status().isOk())
             .andExpect(json().isEqualTo(resourceLoader.getResource("classpath:json/muscle-groups.json").getContentAsString(StandardCharsets.UTF_8)));
-//            .andExpect(content().json(resourceLoader.getResource("classpath:json/muscle-groups.json").getContentAsString(StandardCharsets.UTF_8)));
     }
 }

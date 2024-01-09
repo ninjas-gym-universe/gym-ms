@@ -1,6 +1,11 @@
 spring:
   main:
     banner-mode: off
+  datasource:
+    hikari:
+      maximum-pool-size: 50
+      connection-timeout: 5_000
+      max-lifetime: 10_000
   jpa:
     properties:
       hibernate:

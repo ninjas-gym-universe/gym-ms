@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "muscleGroupData": [
+      {
+        "muscleGroupId": 3,
+        "percentage": 30
+      }
+    ],
+    "name": "bench press"
+  },
+  {
+    "id": 2,
+    "muscleGroupData": [
+      {
+        "muscleGroupId": 3,
+        "percentage": 40
+      }
+    ],
+    "name": "standing dumbbell fly"
+  }
+]

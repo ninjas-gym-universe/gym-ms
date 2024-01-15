@@ -1,7 +1,8 @@
 package by.ninjas.gymuniverse.gymms.web;
 
-import by.ninjas.gymuniverse.gymms.dto.MuscleGroupData;
-import by.ninjas.gymuniverse.gymms.service.MuscleGroupsService;
+import by.ninjas.gymuniverse.gymms.dto.ExerciseData;
+import by.ninjas.gymuniverse.gymms.dto.ExerciseMuscleGroupData;
+import by.ninjas.gymuniverse.gymms.service.ExerciseService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -12,6 +13,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.Set;
 
 import static net.javacrumbs.jsonunit.spring.JsonUnitResultMatchers.json;
 import static org.mockito.Mockito.when;
@@ -28,24 +30,23 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 
 @ActiveProfiles("test")
-@WebMvcTest(controllers = MuscleGroupController.class)
-class MuscleGroupControllerTests {
+@WebMvcTest(controllers = ExerciseController.class)
+class ExerciseControllerTests {
     @Autowired
     private MockMvc mockMvc;
     @MockBean
-    private MuscleGroupsService muscleGroupsService;
+    private ExerciseService exerciseService;
     @Autowired
     private ResourceLoader resourceLoader;
 
     @Test
     void findAllMuscleGroups() throws Exception {
-        when(muscleGroupsService.findAll()).thenReturn(List.of(
-            new MuscleGroupData((short) 1, "test", null),
-            new MuscleGroupData((short) 2, "test2", new MuscleGroupData((short) 1, "test", null))));
+        when(exerciseService.findAllByMuscleGroupId((short) 3)).thenReturn(List.of(
+            new ExerciseData((short) 1, "test", Set.of(new ExerciseMuscleGroupData((short) 3, (short) 33)))));
 
-        mockMvc.perform(get("/muscle-groups"))
+        mockMvc.perform(get("/exercise").param("muscleGroupId", "3"))
             .andDo(print())
             .andExpect(status().isOk())
-            .andExpect(json().isEqualTo(resourceLoader.getResource("classpath:json/muscle-groups-controller.json").getContentAsString(StandardCharsets.UTF_8)));
+            .andExpect(json().isEqualTo(resourceLoader.getResource("classpath:json/exercise-controller.json").getContentAsString(StandardCharsets.UTF_8)));
     }
 }

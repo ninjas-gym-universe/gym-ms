@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "muscleGroupData": [
+    "muscleGroups": [
       {
         "muscleGroupId": 3,
         "percentage": 30
@@ -11,7 +11,7 @@
   },
   {
     "id": 2,
-    "muscleGroupData": [
+    "muscleGroups": [
       {
         "muscleGroupId": 3,
         "percentage": 40

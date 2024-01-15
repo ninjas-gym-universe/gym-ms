@@ -24,7 +24,7 @@ public class ExerciseServiceImpl implements ExerciseService {
 
     @Override
     public List<ExerciseData> findAllByMuscleGroupId(short muscleGroupId) {
-        return exerciseRepository.findAllByMuscleGroupId(muscleGroupId).stream()
+        return exerciseRepository.findAllByMuscleGroupsMuscleGroupId(muscleGroupId).stream()
             .map(ExerciseData::new).toList();
     }
 }

@@ -52,7 +52,7 @@ class ExerciseRepositoryTests extends EmbeddedPostgres {
 
     @Test
     void findAllByMuscleGroupId() {
-        var actual = repository.findAllByMuscleGroupId((short) 3);
+        var actual = repository.findAllByMuscleGroupsMuscleGroupId((short) 3);
 
         assertAll(
             () -> assertEquals(2, actual.size()),

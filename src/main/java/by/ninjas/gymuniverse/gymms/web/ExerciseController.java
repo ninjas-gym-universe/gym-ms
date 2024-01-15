@@ -1,10 +1,10 @@
 package by.ninjas.gymuniverse.gymms.web;
 
 import by.ninjas.gymuniverse.gymms.dto.ExerciseData;
-import by.ninjas.gymuniverse.gymms.dto.MuscleGroupData;
 import by.ninjas.gymuniverse.gymms.persistence.entities.Exercise;
 import by.ninjas.gymuniverse.gymms.service.ExerciseService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -29,7 +29,7 @@ import java.util.List;
 @Tag(name = "API for exercise")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/exercise")
+@RequestMapping("/exercises")
 public class ExerciseController {
 
     private final ExerciseService exerciseService;
@@ -44,9 +44,9 @@ public class ExerciseController {
         summary = "Get exercise list by given muscle group",
         responses = @ApiResponse(
             responseCode = "200",
-            content = @Content(array = @ArraySchema(schema = @Schema(implementation = MuscleGroupData.class)))))
+            content = @Content(array = @ArraySchema(schema = @Schema(implementation = ExerciseData.class)))))
     @GetMapping
-    public List<ExerciseData> getAllMuscleGroups(@RequestParam short muscleGroupId) {
+    public List<ExerciseData> getAllMuscleGroups(@Parameter(description = "Muscle group id", required = true) @RequestParam short muscleGroupId) {
         return exerciseService.findAllByMuscleGroupId(muscleGroupId);
     }
 

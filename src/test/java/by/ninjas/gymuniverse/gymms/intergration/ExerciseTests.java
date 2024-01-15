@@ -38,7 +38,7 @@ class ExerciseTests extends EmbeddedPostgres {
     @Test
     void findAllMuscleGroups() throws Exception {
 
-        mockMvc.perform(get("/exercise").param("muscleGroupId", "3"))
+        mockMvc.perform(get("/exercises").param("muscleGroupId", "3"))
             .andDo(print())
             .andExpect(status().isOk())
             .andExpect(json().isArray())

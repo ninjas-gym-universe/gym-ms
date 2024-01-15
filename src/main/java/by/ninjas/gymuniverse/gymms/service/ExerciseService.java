@@ -19,7 +19,8 @@ public interface ExerciseService {
      * Fetch all of {@link Exercise} by given {@link MuscleGroup}
      *
      * @param muscleGroupId id of muscleGroup
-     * @return List of {@link Exercise}
+     * @return {@link List} of {@link Exercise}
+     * @since 0.2.0
      */
     List<ExerciseData> findAllByMuscleGroupId(short muscleGroupId);
 

@@ -18,6 +18,7 @@ public interface MuscleGroupsService {
      * Fetch all of {@link MuscleGroupData}
      *
      * @return List of {@link MuscleGroupData}
+     * @since 0.2.0
      */
     List<MuscleGroupData> findAll();
 

@@ -40,5 +40,5 @@ public interface ExerciseRepository extends JpaRepository<Exercise, Short> {
             LEFT JOIN FETCH e.muscleGroups mg
             WHERE mg.muscleGroupId = ?1
         """)
-    List<Exercise> findAllByMuscleGroupId(short muscleGroupId);
+    List<Exercise> findAllByMuscleGroupsMuscleGroupId(short muscleGroupId);
 }

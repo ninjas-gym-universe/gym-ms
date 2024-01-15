@@ -1,7 +1,8 @@
 package by.ninjas.gymuniverse.gymms.web;
 
 import by.ninjas.gymuniverse.gymms.dto.ExerciseData;
-import by.ninjas.gymuniverse.gymms.dto.ExerciseMuscleGroupData;
+import by.ninjas.gymuniverse.gymms.persistence.embeddable.ExerciseMuscleGroup;
+import by.ninjas.gymuniverse.gymms.persistence.entities.Exercise;
 import by.ninjas.gymuniverse.gymms.service.ExerciseService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +42,14 @@ class ExerciseControllerTests {
 
     @Test
     void findAllMuscleGroups() throws Exception {
-        when(exerciseService.findAllByMuscleGroupId((short) 3)).thenReturn(List.of(
-            new ExerciseData((short) 1, "test", Set.of(new ExerciseMuscleGroupData((short) 3, (short) 33)))));
+        ExerciseMuscleGroup exerciseMuscleGroup = new ExerciseMuscleGroup((short) 3, (short) 33);
+        Exercise testExercise = new Exercise();
+        testExercise.setId((short) 1);
+        testExercise.setName("test");
+        testExercise.setMuscleGroups(Set.of(exerciseMuscleGroup));
 
-        mockMvc.perform(get("/exercise").param("muscleGroupId", "3"))
+        when(exerciseService.findAllByMuscleGroupId((short) 3)).thenReturn(List.of(new ExerciseData(testExercise)));
+        mockMvc.perform(get("/exercises").param("muscleGroupId", "3"))
             .andDo(print())
             .andExpect(status().isOk())
             .andExpect(json().isEqualTo(resourceLoader.getResource("classpath:json/exercise-controller.json").getContentAsString(StandardCharsets.UTF_8)));

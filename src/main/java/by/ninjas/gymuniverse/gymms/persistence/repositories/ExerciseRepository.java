@@ -27,4 +27,18 @@ public interface ExerciseRepository extends JpaRepository<Exercise, Short> {
             LEFT JOIN FETCH e.muscleGroups
         """)
     List<Exercise> findAllWithMuscleGroups();
+
+    /**
+     * Find exercises with the corresponding muscle group.
+     *
+     * @return {@link List} of {@link Exercise}
+     * @since 0.2.0
+     */
+    @Query("""
+        SELECT e
+          FROM Exercise e
+            LEFT JOIN FETCH e.muscleGroups mg
+            WHERE mg.muscleGroupId = ?1
+        """)
+    List<Exercise> findAllByMuscleGroupsMuscleGroupId(short muscleGroupId);
 }

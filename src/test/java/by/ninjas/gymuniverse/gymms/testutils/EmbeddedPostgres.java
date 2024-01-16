@@ -1,5 +1,6 @@
 package by.ninjas.gymuniverse.gymms.testutils;
 
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.DynamicPropertyRegistry;
 import org.springframework.test.context.DynamicPropertySource;
@@ -18,6 +19,7 @@ import org.testcontainers.junit.jupiter.Testcontainers;
  */
 @ActiveProfiles("test")
 @Testcontainers
+@DirtiesContext
 public abstract class EmbeddedPostgres {
 
     @Container

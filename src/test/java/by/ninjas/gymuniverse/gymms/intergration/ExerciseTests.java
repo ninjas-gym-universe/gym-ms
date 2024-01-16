@@ -1,6 +1,6 @@
 package by.ninjas.gymuniverse.gymms.intergration;
 
-import by.ninjas.gymuniverse.gymms.persistence.entities.MuscleGroup;
+import by.ninjas.gymuniverse.gymms.persistence.entities.Exercise;
 import by.ninjas.gymuniverse.gymms.testutils.EmbeddedPostgres;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +18,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
- * Integration tests for {@link MuscleGroup}.
+ * Integration tests for {@link Exercise}.
  *
  * @author dziomin
  * @version 0.2.0
@@ -26,9 +26,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
-@Sql(value = "classpath:sql/muscle-groups.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
+@Sql(value = "classpath:sql/exercises-with-muscle-groups.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
 @Sql(scripts = "classpath:sql/clear-all.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_CLASS)
-class MuscleGroupTests extends EmbeddedPostgres {
+class ExerciseTests extends EmbeddedPostgres {
 
     @Autowired
     private MockMvc mockMvc;
@@ -38,10 +38,10 @@ class MuscleGroupTests extends EmbeddedPostgres {
     @Test
     void findAllMuscleGroups() throws Exception {
 
-        mockMvc.perform(get("/muscle-groups"))
+        mockMvc.perform(get("/exercises").param("muscleGroupId", "3"))
             .andDo(print())
             .andExpect(status().isOk())
             .andExpect(json().isArray())
-            .andExpect(json().isEqualTo(resourceLoader.getResource("classpath:json/muscle-groups-integration.json").getContentAsString(StandardCharsets.UTF_8)));
+            .andExpect(json().isEqualTo(resourceLoader.getResource("classpath:json/exercise-integration.json").getContentAsString(StandardCharsets.UTF_8)));
     }
 }

@@ -21,8 +21,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @since 0.2.0
  */
 @DbTest
-@Sql("classpath:sql/exercises-with-muscle-groups.sql")
-@Sql(scripts = "classpath:sql/clear-all.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+@Sql(scripts = "classpath:sql/exercises-with-muscle-groups.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_CLASS)
+@Sql(scripts = "classpath:sql/clear-all.sql", executionPhase = Sql.ExecutionPhase.AFTER_TEST_CLASS)
 class ExerciseRepositoryTests extends EmbeddedPostgres {
 
     @Autowired
@@ -45,7 +45,28 @@ class ExerciseRepositoryTests extends EmbeddedPostgres {
                 .containsExactlyInAnyOrder(
                     new ExerciseMuscleGroup((short) 2, (short) 100),
                     new ExerciseMuscleGroup((short) 3, (short) 30),
+                    new ExerciseMuscleGroup((short) 3, (short) 40),
                     new ExerciseMuscleGroup((short) 4, (short) 100))
         );
     }
+
+    @Test
+    void findAllByMuscleGroupId() {
+        var actual = repository.findAllByMuscleGroupsMuscleGroupId((short) 3);
+
+        assertAll(
+            () -> assertEquals(2, actual.size()),
+            () -> assertThat(actual)
+                .extracting(Exercise::getId, Exercise::getName)
+                .containsExactlyInAnyOrder(
+                    tuple((short) 1, "bench press"),
+                    tuple((short) 2, "standing dumbbell fly")),
+            () -> assertThat(actual)
+                .flatExtracting(Exercise::getMuscleGroups)
+                .containsExactlyInAnyOrder(
+                    new ExerciseMuscleGroup((short) 3, (short) 30),
+                    new ExerciseMuscleGroup((short) 3, (short) 40))
+        );
+    }
+
 }

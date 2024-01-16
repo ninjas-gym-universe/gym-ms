@@ -13,4 +13,5 @@ values (nextval('seq_exercise'), 'bench press'),
 insert into exercise_muscle_group (exercise_id, muscle_group_id, percentage)
 values (1, 2, 100),
        (1, 3, 30),
+       (2, 3, 40),
        (2, 4, 100);

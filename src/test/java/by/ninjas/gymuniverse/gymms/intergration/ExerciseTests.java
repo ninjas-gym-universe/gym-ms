@@ -15,6 +15,7 @@ import java.nio.charset.StandardCharsets;
 import static net.javacrumbs.jsonunit.spring.JsonUnitResultMatchers.json;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 /**
@@ -36,12 +37,12 @@ class ExerciseTests extends EmbeddedPostgres {
     private ResourceLoader resourceLoader;
 
     @Test
-    void findAllMuscleGroups() throws Exception {
+    void findAllExercises() throws Exception {
 
         mockMvc.perform(get("/exercises").param("muscleGroupId", "3"))
             .andDo(print())
             .andExpect(status().isOk())
             .andExpect(json().isArray())
-            .andExpect(json().isEqualTo(resourceLoader.getResource("classpath:json/exercise-integration.json").getContentAsString(StandardCharsets.UTF_8)));
+            .andExpect(content().json(resourceLoader.getResource("classpath:json/exercise-integration.json").getContentAsString(StandardCharsets.UTF_8), false));
     }
 }

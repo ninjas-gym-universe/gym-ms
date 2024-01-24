@@ -1,5 +1,6 @@
 package by.ninjas.gymuniverse.gymms.persistence.entities;
 
+import by.ninjas.gymuniverse.gymms.persistence.enums.FileExtension;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -11,33 +12,33 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
-import static jakarta.persistence.CascadeType.MERGE;
-import static jakarta.persistence.CascadeType.PERSIST;
 import static jakarta.persistence.FetchType.LAZY;
 import static jakarta.persistence.GenerationType.SEQUENCE;
 
 /**
- * Entity for table <b>muscle_group</b>.
+ * Entity for table <b>exercise_resource</b>.
  *
- * @author Artyom Drobysh (artyom.drobysh96@gmail.com)
+ * @author dziomin
  * @version 0.2.0
  * @since 0.2.0
  */
 @Getter
 @Setter
+@ToString(exclude = "exercise")
 @Entity
-@ToString(exclude = "parent")
-public class MuscleGroup {
+public class ExerciseResource {
 
     @Id
     @SequenceGenerator(name = "seq_muscle_group", sequenceName = "seq_muscle_group", allocationSize = 1)
     @GeneratedValue(strategy = SEQUENCE, generator = "seq_muscle_group")
     private Short id;
+    @ManyToOne(fetch = LAZY)
+    @JoinColumn(name = "exercise_id", referencedColumnName = "id")
+    private Exercise exercise;
+    @Column(nullable = false)
+    private byte[] content;
     @Column(nullable = false, length = 50)
-    private String name;
-    @ManyToOne(fetch = LAZY, cascade = {PERSIST, MERGE})
-    @JoinColumn(name = "parent_id", referencedColumnName = "id")
-    private MuscleGroup parent;
-    @Column
-    private byte[] avatar;
+    private String fileName;
+    @Column(nullable = false)
+    private FileExtension fileExtension;
 }

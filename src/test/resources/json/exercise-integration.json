@@ -7,7 +7,8 @@
         "percentage": 30
       }
     ],
-    "name": "bench press"
+    "name": "bench press",
+    "resources": []
   },
   {
     "id": 2,
@@ -17,6 +18,7 @@
         "percentage": 40
       }
     ],
-    "name": "standing dumbbell fly"
+    "name": "standing dumbbell fly",
+    "resources": []
   }
 ]

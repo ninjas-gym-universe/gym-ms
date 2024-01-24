@@ -11,6 +11,8 @@ spring:
       maximum-pool-size: 50
       connection-timeout: 300_000
       max-lifetime: 3_600_000
+      data-source-properties:
+        stringtype: unspecified
   jpa:
     hibernate:
       ddl-auto: validate

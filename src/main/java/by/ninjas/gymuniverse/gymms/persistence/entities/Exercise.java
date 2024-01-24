@@ -1,6 +1,7 @@
 package by.ninjas.gymuniverse.gymms.persistence.entities;
 
 import by.ninjas.gymuniverse.gymms.persistence.embeddable.ExerciseMuscleGroup;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -8,10 +9,12 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.SequenceGenerator;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.Set;
 
 import static jakarta.persistence.GenerationType.SEQUENCE;
@@ -38,4 +41,6 @@ public class Exercise {
     @CollectionTable(name = "exercise_muscle_group",
         joinColumns = @JoinColumn(name = "exercise_id", referencedColumnName = "id"))
     private Set<ExerciseMuscleGroup> muscleGroups;
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL)
+    private List<ExerciseResource> resources;
 }
